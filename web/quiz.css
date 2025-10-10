@@ -138,19 +138,16 @@ nav {
     font-weight:600;
 }
 
-.btn:active { transform: translateY(1px); }
+.btn:active { 
+    transform: translateY(1px); 
+}
+
 .binary {
     margin-top:8px;
     font-family: monospace;
     color: #444;
 }
 
-@media (max-width: 768px) {
-    .main-section {
-        flex-direction: column;
-        align-items: center;
-    }
-}
 
 /* footer section */
 footer {
@@ -183,6 +180,11 @@ footer a{
 
     .hero-text h1 {
         font-size: 2.8rem;
+    }
+
+    .main-section {
+        flex-direction: column;
+        align-items: center;
     }
 }
 

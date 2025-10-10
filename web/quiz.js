@@ -1,3 +1,11 @@
+const ARDUINO_IP = "172.20.10.12";  // arduini local IP
+
+function sendToArduino(binaryValue) {
+  fetch(`http://${ARDUINO_IP}/set?ans=${binaryValue}`)
+    .then(res => console.log("Sent to Arduino:", binaryValue))
+    .catch(err => console.error("Failed to send:", err));
+}
+
 // ans is in range(0,15) (4 bits binary)
 function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -27,7 +35,8 @@ function generateProblem() {
         b = randInt(0, a);
         result = a - b;
     }
-
+    const bin = result.toString(2).padStart(mode === 'hard' ? 8 : 4, '0');
+    
     // show QUIZ
     const problemEl = document.getElementById('problem');
     problemEl.textContent = `${a} ${op} ${b} = ?`;
@@ -37,11 +46,13 @@ function generateProblem() {
     const showBinary = document.getElementById('showBinary').checked;
     const binaryEl = document.getElementById('binary');
     if (showBinary) {
-        const bin = result.toString(2).padStart(mode === 'hard' ? 8 : 4, '0');
         binaryEl.textContent = `Answer (binary ${mode === 'hard' ? '8 bits' : '4 bits'}): ${bin}`;
     } else {
-        binaryEl.textContent = '';
+        binaryEl.textContent = ''; // if player don't select check box
     }
+
+    // send binary ans to arduino
+    sendToArduino(bin);
 }
 
 // set event listener
