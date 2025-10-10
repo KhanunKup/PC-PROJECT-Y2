@@ -1,6 +1,9 @@
 #include <WiFiS3.h>
 #include <LiquidCrystal_I2C.h>
 
+int status = WL_IDLE_STATUS;
+WiFiServer server(80);
+
 char ssid[] = "IKhanun";    //  ssid
 char pass[] = "IK2548rosi"; //  password
 
@@ -25,10 +28,7 @@ void setup() {
 
   lcd.init();
   lcd.backlight();
-  
-  int status = WL_IDLE_STATUS;
-  WiFiServer server(80);
-  
+
   // connect to local wifi
   while (status != WL_CONNECTED) {
     Serial.print("Attempting to connect to SSID: ");
@@ -47,7 +47,7 @@ void setup() {
   lcd.print(binaryString);
 }
 
-void loop() {  // seperate code to 2 segment
+void loop() { // seperate code to 2 segment
   handleWebServer();
   handleButtons();
 }
@@ -63,7 +63,7 @@ void handleWebServer() {
         char c = client.read();
         if (c == '\n') {
           if (currentLine.length() == 0) {
-            // send response back
+            // -- send response back --
             client.println("HTTP/1.1 200 OK");
             client.println("Content-Type: text/plain");
             client.println("Access-Control-Allow-Origin: *");
@@ -83,7 +83,7 @@ void handleWebServer() {
             }
             break;
           } else {
-            // read request
+            // -- read request --
             if (currentLine.startsWith("GET ")) {
               int firstSpace = currentLine.indexOf(' ');
               int secondSpace = currentLine.indexOf(' ', firstSpace + 1);
@@ -111,28 +111,30 @@ void handleWebServer() {
 }
 
 void handleButtons() {
-  if (digitalRead(btn1) == LOW) {   // press 1
+  if (digitalRead(btn1) == LOW) {
     binaryString += "1"; 
     updateDisplay(); 
     delay(250); 
   }
-  if (digitalRead(btn0) == LOW) {  // press 0
+
+  if (digitalRead(btn0) == LOW) {
     binaryString += "0"; 
-    updateDisplay();
+    updateDisplay(); 
     delay(250); 
   }
-  if (digitalRead(btnClear) == LOW) {  // press clear
+
+  if (digitalRead(btnClear) == LOW) { 
     binaryString = ""; 
     updateDisplay(); 
     delay(250); 
   }
 
-  if (digitalRead(btnEnter) == LOW) {  // press enter ans
+  if (digitalRead(btnEnter) == LOW) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Ans:");
     lcd.setCursor(5, 0);
-    lcd.print(correctAnswer);  // show correct ans
+    lcd.print(correctAnswer);
     lcd.setCursor(0, 1);
     
     if (binaryString == correctAnswer) {
