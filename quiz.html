@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- doesn't matter just a nav bar -->
     <header>
         <div class="container">
             <nav>
@@ -26,20 +27,23 @@
         <h1 style="text-align:center;margin-top:40px;">Let's see if your brain still works after all that scrolling reels</h1>
 
         <section class="main-section">
-            <!-- QUIZ Section -->
             <section class="quiz" aria-label="Easy math quiz">
                 <div class="meta">Select mode and click "Random" to create QUIZ</div>
 
+                <!-- select (easy/hard) mode -->
                 <div class="controls" style="margin-bottom:8px;">
                     <label><input type="radio" name="mode" value="easy" checked>Easy 4 bits (Ans ≤ 15)</label>
                     <label><input type="radio" name="mode" value="hard">Hard 8 bits (Ans ≤ 255)</label>
                 </div>
 
+                <!-- problem and status(correct/wrong) -->
                 <div id="problem" class="problem">Loading Quiz... :D</div>
+                <div id="result-status" class="result-status"></div>
 
+                <!-- random button & binary ans checkbox -->
                 <div class="controls">
                     <button id="newBtn" class="btn" type="button">Random</button>
-                    <label style="display:flex;align-items:center;gap:8px;">
+                    <label style="display:flex; align-items-center; gap:8px;">
                         <input id="showBinary" type="checkbox" />
                         show binary ANS
                     </label>
@@ -48,23 +52,40 @@
                 <div id="binary" class="binary"></div>
             </section>
 
-            <!-- Charactor Selection-->
             <section class="character-area">
+                <!-- didn't mean to disrespect -/\- -->
                 <p class="character-text">"Choose your spirit animal :)"</p>
                 <img id="charImage" src="./resources/Momoi-curious.svg" alt="Character">
-                <p id="charText" class="character-text">"you skin color seem..."</p>
+                <p id="charText" class="character-text">"your skin color seems..."</p>
 
                 <div class="char-select">
-                    <button class="char-btn active" data-img="./resources/Momoi-curious.svg" data-text='"your skin color seems..."'>
+                    <!-- 3 state (default/correct/wrong) -->
+                    <button class="char-btn active" 
+                            data-img="./resources/Momoi-curious.svg" 
+                            data-text-default='"your skin color seems..."'
+                            data-text-correct='"Yay! You are so smart!"'
+                            data-text-wrong='"ํYou stupid nig.."'>
                         <img src="./resources/Momoi-curious.svg" alt="Momoi">
                     </button>
-                    <button class="char-btn" data-img="./resources/Ninja Hun Sen.png" data-text='"You are smart. Are you interested working in Poipet Perhaps?"'>
+                    <button class="char-btn" 
+                            data-img="./resources/Ninja Hun Sen.png" 
+                            data-text-default='"You are smart. Are you interested working in Poipet perhaps?"'
+                            data-text-correct='"Excellent! Poipet is waiting for you."'
+                            data-text-wrong='"You need more practice. Maybe start from Phnom Penh?"'>
                         <img src="./resources/Ninja Hun Sen.png" alt="Ninja Hun Sen">
                     </button>
-                    <button class="char-btn" data-img="./resources/Panwit the Destroyer.png" data-text='//says something in a very deep tone.'>
+                    <button class="char-btn" 
+                            data-img="./resources/Panwit the Destroyer.png" 
+                            data-text-default='//says something in a very deep tone.'
+                            data-text-correct='//nods with approval.'
+                            data-text-wrong='//stares silently.' >
                         <img src="./resources/Panwit the Destroyer.png" alt="Panwit the Destroyer">
                     </button>
-                    <button class="char-btn" data-img="./resources/Master Ian.png" data-text='"Discrete math and Database are still more fun than this one."'>
+                    <button class="char-btn" 
+                            data-img="./resources/Master Ian.png" 
+                            data-text-default='"Discrete math and Database are still more fun than this one."'
+                            data-text-correct='"See? Logic is beautiful."'
+                            data-text-wrong='"Perhaps a review of number systems is in order."'>
                         <img src="./resources/Master Ian.png" alt="Master Ian">
                     </button>
                 </div>

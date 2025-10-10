@@ -43,7 +43,7 @@ nav {
     transition: all 0.2s;
 }
 
-/* about section */
+/* hero section fun with code ref :D*/
 .hero-section {
     display: flex;
     /* center section */
@@ -78,11 +78,9 @@ footer {
     background-color: #FFA7BC;
     color: white;
     padding: 15px 120px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
     position: relative;
     z-index: 2;
 }
@@ -90,6 +88,7 @@ footer {
 footer a{
     padding-right: 10px;
     text-decoration: none;
+    color: white;
 }
 
 /* for ipad */
@@ -105,8 +104,13 @@ footer a{
     .hero-text h1 {
         font-size: 2.8rem;
     }
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+    }
 }
-
+/* is this nessesary */
 /* for iphone */
 @media (max-width: 480px) {
     
