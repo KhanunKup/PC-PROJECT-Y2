@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EASYMATH</title>
+    <link href="quiz.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="https://www.it.kmitl.ac.th/th" target="_blank">
+                        <img src="./resources/IT logo.svg" alt="IT KMITL Logo">
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 style="text-align:center;margin-top:40px;">Let's see if your brain still works after all that scrolling reels</h1>
+
+        <section class="main-section">
+            <!-- QUIZ Section -->
+            <section class="quiz" aria-label="Easy math quiz">
+                <div class="meta">Select mode and click "Random" to create QUIZ</div>
+
+                <div class="controls" style="margin-bottom:8px;">
+                    <label><input type="radio" name="mode" value="easy" checked>Easy 4 bits (Ans ≤ 15)</label>
+                    <label><input type="radio" name="mode" value="hard">Hard 8 bits (Ans ≤ 255)</label>
+                </div>
+
+                <div id="problem" class="problem">Loading Quiz... :D</div>
+
+                <div class="controls">
+                    <button id="newBtn" class="btn" type="button">Random</button>
+                    <label style="display:flex;align-items:center;gap:8px;">
+                        <input id="showBinary" type="checkbox" />
+                        show binary ANS
+                    </label>
+                </div>
+
+                <div id="binary" class="binary"></div>
+            </section>
+
+            <!-- Charactor Selection-->
+            <section class="character-area">
+                <p class="character-text">"Choose your spirit animal :)"</p>
+                <img id="charImage" src="./resources/Momoi-curious.svg" alt="Character">
+                <p id="charText" class="character-text">"you skin color seem..."</p>
+
+                <div class="char-select">
+                    <button class="char-btn active" data-img="./resources/Momoi-curious.svg" data-text='"you skin color seem..."'>
+                        <img src="./resources/Momoi-curious.svg" alt="Momoi">
+                    </button>
+                    <button class="char-btn" data-img="./resources/Ninja Hun Sen.png" data-text='"You are smart. Are you interested working in Poipet?"'>
+                        <img src="./resources/Ninja Hun Sen.png" alt="Ninja Hun Sen">
+                    </button>
+                    <button class="char-btn" data-img="./resources/Panwit the Destroyer.png" data-text='//say something in a very deep tone.'>
+                        <img src="./resources/Panwit the Destroyer.png" alt="Panwit the Destroyer">
+                    </button>
+                    <button class="char-btn" data-img="./resources/Master Ian.png" data-text='"Discrete math and Database are still more fun than this one."'>
+                        <img src="./resources/Master Ian.png" alt="Master Ian">
+                    </button>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 EASYMATH, KMITL</p>
+        <div>
+            Made by 
+            <a href="https://github.com/KhanunKup" target="_blank">@KhanunKup</a>
+            <a href="https://github.com/megabitsss" target="_blank">@megabitsss</a>
+            <a href="https://github.com/Krjamwat" target="_blank">@Krjamwat</a>
+            <a href="https://github.com/Asujiikaruda" target="_blank">@Asujiikaruda</a>
+        </div>
+    </footer>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
