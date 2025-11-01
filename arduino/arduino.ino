@@ -1,11 +1,11 @@
 #include <WiFiS3.h>
 #include <LiquidCrystal_I2C.h>
 
+// --- wifi config ---
+char ssid[] = "IKhanun";       // wifi ssid
+char pass[] = "IK2548rosi";   // wifi pass
 int status = WL_IDLE_STATUS;
-WiFiServer server(80);
-
-char ssid[] = "IKhanun";    //  ssid
-char pass[] = "IK2548rosi"; //  password
+WiFiServer server(80); // initialize the server on port 80
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -15,21 +15,20 @@ const int btnClear = 2;
 const int btnEnter = 3;
 
 String binaryString = "";
-String correctAnswer = "0000";
-String lastResult = "none"; // keep last state
+String correctAnswer = "0000"; // value will be updated from the web
 
 void setup() {
   Serial.begin(9600);
   
-  pinMode(btn1, INPUT_PULLUP);
+  pinMode(btn1, INPUT_PULLUP); // use internal pull-up resistors
   pinMode(btn0, INPUT_PULLUP);
   pinMode(btnClear, INPUT_PULLUP);
   pinMode(btnEnter, INPUT_PULLUP);
 
   lcd.init();
   lcd.backlight();
-
-  // connect to local wifi
+  
+  // --- connect to wifi ---
   while (status != WL_CONNECTED) {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
@@ -37,8 +36,8 @@ void setup() {
     delay(5000);
   }
   
-  server.begin();
-  Serial.println("\nServer started");
+  server.begin(); // start the web server
+  Serial.println("Server started");
   printWifiStatus();
 
   lcd.setCursor(0, 0);
@@ -47,57 +46,39 @@ void setup() {
   lcd.print(binaryString);
 }
 
-void loop() { // seperate code to 2 segment
-  handleWebServer();
-  handleButtons();
+void loop() {
+  handleWebServer(); // check for incoming web data
+  handleButtons();   // check for button press
 }
 
+// --- handle web data ---
 void handleWebServer() {
   WiFiClient client = server.available();
   if (client) {
     String currentLine = "";
-    String requestPath = "";
-    
     while (client.connected()) {
       if (client.available()) {
         char c = client.read();
         if (c == '\n') {
+          // if the line is blank, the HTTP request has ended
           if (currentLine.length() == 0) {
-            // -- send response back --
+            // send a standard HTTP response
             client.println("HTTP/1.1 200 OK");
-            client.println("Content-Type: text/plain");
-            client.println("Access-Control-Allow-Origin: *");
-            client.println("Connection: close");
+            client.println("Content-type:text/html");
+            client.println("Access-Control-Allow-Origin: *"); // allow requests from any origin
             client.println();
-
-            if (requestPath.startsWith("/set?ans=")) {
-              client.println("Answer Updated");
-            } else if (requestPath.startsWith("/status")) {
-              client.println(lastResult);
-              // reset state of result
-              if (lastResult != "none") {
-                lastResult = "none";
-              }
-            } else {
-              client.println("Hello from Arduino!");
-            }
+            client.println("OK");
             break;
           } else {
-            // -- read request --
-            if (currentLine.startsWith("GET ")) {
-              int firstSpace = currentLine.indexOf(' ');
-              int secondSpace = currentLine.indexOf(' ', firstSpace + 1);
-              if (secondSpace > firstSpace) {
-                requestPath = currentLine.substring(firstSpace + 1, secondSpace);
-              }
+            // check if the request contains our target path and parameter
+            if (currentLine.startsWith("GET /set?ans=")) {
+              // extract the binary string from the URL
+              int startIndex = currentLine.indexOf('=') + 1;
+              int endIndex = currentLine.indexOf(' ', startIndex);
+              correctAnswer = currentLine.substring(startIndex, endIndex);
               
-              if (requestPath.startsWith("/set?ans=")) {
-                int startIndex = requestPath.indexOf('=') + 1;
-                correctAnswer = requestPath.substring(startIndex);
-                lastResult = "none"; // reset state when random new quiz
-                Serial.print("Updated correct answer to: ");
-                Serial.println(correctAnswer);
-              }
+              Serial.print("Updated correct answer to: ");
+              Serial.println(correctAnswer);
             }
             currentLine = "";
           }
@@ -106,27 +87,28 @@ void handleWebServer() {
         }
       }
     }
-    client.stop();
+    client.stop(); // close the connection
   }
 }
 
+// --- button function ---
 void handleButtons() {
   if (digitalRead(btn1) == LOW) {
-    binaryString += "1"; 
-    updateDisplay(); 
-    delay(250); 
+    binaryString += "1";
+    updateDisplay();
+    delay(250);
   }
 
   if (digitalRead(btn0) == LOW) {
-    binaryString += "0"; 
-    updateDisplay(); 
-    delay(250); 
+    binaryString += "0";
+    updateDisplay();
+    delay(250);
   }
 
-  if (digitalRead(btnClear) == LOW) { 
-    binaryString = ""; 
-    updateDisplay(); 
-    delay(250); 
+  if (digitalRead(btnClear) == LOW) {
+    binaryString = "";
+    updateDisplay();
+    delay(250);
   }
 
   if (digitalRead(btnEnter) == LOW) {
@@ -135,14 +117,12 @@ void handleButtons() {
     lcd.print("Ans:");
     lcd.setCursor(5, 0);
     lcd.print(correctAnswer);
+
     lcd.setCursor(0, 1);
-    
     if (binaryString == correctAnswer) {
       lcd.print("Correct!");
-      lastResult = "correct";
     } else {
       lcd.print("Wrong!");
-      lastResult = "wrong";
     }
 
     delay(2000);
