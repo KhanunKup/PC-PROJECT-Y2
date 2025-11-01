@@ -15,6 +15,8 @@ String binaryString = "";
 String correctAnswer = "0000";
 String lastResult = "none"; // keep last state
 
+WiFiServer server(80);
+
 void setup() {
   Serial.begin(9600);
   
@@ -27,8 +29,6 @@ void setup() {
   lcd.backlight();
   
   int status = WL_IDLE_STATUS;
-  WiFiServer server(80);
-  
   // connect to local wifi
   while (status != WL_CONNECTED) {
     Serial.print("Attempting to connect to SSID: ");
@@ -53,7 +53,7 @@ void loop() {  // seperate code to 2 segment
 }
 
 void handleWebServer() {
-  WiFiClient client = server.available();
+  WiFiClient client = server.available();  // check if it has new client
   if (client) {
     String currentLine = "";
     String requestPath = "";
