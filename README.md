@@ -26,6 +26,8 @@ Switch
 ![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/main/resources/poster.png?raw=true)
 
 ## Clip VDO แนะนำโปรเจกต์
+![image]([https://github.com/KhanunKup/PC-PROJECT-Y2/blob/main/resources/poster.png?raw=true](https://www.youtube.com/watch?v=1SWllteXLZ4))
+
 
 ## Library ที่ใช้งาน
 ```c++
