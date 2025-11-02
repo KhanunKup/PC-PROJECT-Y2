@@ -7,7 +7,9 @@
   เลขฐานสองเป็นพื้นฐานที่สำคัญในระบบคอมพิวเตอร์ แต่การเรียนในห้องเรียนกลับมีเนื้อหาที่ไม่ไม่น่าสนใจ โปรเจคนี้จึงถูกสร้างขึ้นเพื่อแก้ปัญหานี้ โดยเปลี่ยนการเรียนรู้ให้เป็นเกมที่สนุกและโต้ตอบได้ ผ่านการสุ่มโจทย์ผ่านทาง Website และกรอกข้อมูลได้ผ่านทาง Arduino ซึ่งได้นำเอาหลักการของเกมมาใช้ เพื่อทำให้เรื่องที่เข้าใจยากกลายเป็นเรื่องที่สนุกขึ้น
 
 ## วงจรใน Arduino
-![image](https://drive.google.com/file/d/1JrAYb0tmKwcVyS8HaORSTSJrj2w6rWCO/view?usp=sharing)
+![image]()
+
+![image]()
 
 ## อุปกรณ์ที่ใช้
 
@@ -21,7 +23,7 @@ Switch
 ![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/8ecb4a5e3200306e91684e915195413c6bd5387d/resources/Switch.png)
 
 ## Poster
-![image](https://media.discordapp.net/attachments/1426179466723459092/1434464197634424913/Add_a_heading_4.png?ex=69086c63&is=69071ae3&hm=7896be626f5095b1fe45f7dcf8c9d56ea161d94fc4782dbac7522ec58d1ebbc7&=&format=webp&quality=lossless&width=710&height=1006)
+![image]()
 ## Clip VDO แนะนำโปรเจกต์
 
 ## Library ที่ใช้งาน
