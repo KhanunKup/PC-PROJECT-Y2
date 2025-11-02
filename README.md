@@ -23,7 +23,8 @@ Switch
 ![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/8ecb4a5e3200306e91684e915195413c6bd5387d/resources/Switch.png)
 
 ## Poster
-![image]()
+![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/main/resources/poster.png?raw=true)
+
 ## Clip VDO แนะนำโปรเจกต์
 
 ## Library ที่ใช้งาน
