@@ -48,6 +48,110 @@ Switch
   }
 ```
 
+## ฟังก์ชั่นที่สำคัญ
+- Listener ของ Switch
+```c++
+void handleButtons() {
+  if (digitalRead(btn1) == LOW) {   // press 1
+    binaryString += "1"; 
+    updateDisplay(); 
+    delay(250);
+  }
+  if (digitalRead(btn0) == LOW) {  // press 0
+    binaryString += "0"; 
+    updateDisplay();
+    delay(250); 
+  }
+  if (digitalRead(btnClear) == LOW) {  // press clear
+    binaryString = ""; 
+    updateDisplay(); 
+    delay(250);
+  }
+
+  if (digitalRead(btnEnter) == LOW) {  // press enter ans
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Ans:");
+    lcd.setCursor(5, 0);
+    lcd.print(correctAnswer);  // show correct ans
+    lcd.setCursor(0, 1);
+    
+    if (binaryString == correctAnswer) {
+      lcd.print("Correct!");
+      lastResult = "correct";
+    } else {
+      lcd.print("Wrong!");
+      lastResult = "wrong";
+    }
+
+    delay(2000);
+    binaryString = "";
+    updateDisplay();
+  }
+}
+```
+
+- Listener ระหว่าง Arduino & Browser
+```c++
+void handleWebServer() {
+  WiFiClient client = server.available();  // check if it has new client
+  if (client) {
+    String currentLine = "";
+    String requestPath = "";
+    
+    while (client.connected()) {
+      if (client.available()) {
+        char c = client.read();
+        if (c == '\n') {
+          if (currentLine.length() == 0) {
+            // send response back
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-Type: text/plain");
+            client.println("Access-Control-Allow-Origin: *");
+            client.println("Connection: close");
+            client.println();
+
+            if (requestPath.startsWith("/set?ans=")) {
+              client.println("Answer Updated");
+            } else if (requestPath.startsWith("/status")) {
+              client.println(lastResult);
+              // reset state of result
+              if (lastResult != "none") {
+                lastResult = "none";
+              }
+            } else {
+              client.println("Hello from Arduino!");
+            }
+            break;
+          } else {
+            // read request
+            if (currentLine.startsWith("GET ")) {
+              int firstSpace = currentLine.indexOf(' ');
+              int secondSpace = currentLine.indexOf(' ', firstSpace + 1);
+              if (secondSpace > firstSpace) {
+                requestPath = currentLine.substring(firstSpace + 1, secondSpace);
+              }
+              
+              if (requestPath.startsWith("/set?ans=")) {
+                int startIndex = requestPath.indexOf('=') + 1;
+                correctAnswer = requestPath.substring(startIndex);
+                lastResult = "none"; // reset state when random new quiz
+                Serial.print("Updated correct answer to: ");
+                Serial.println(correctAnswer);
+              }
+            }
+            currentLine = "";
+          }
+        } else if (c != '\r') {
+          currentLine += c;
+        }
+      }
+    }
+    client.stop();
+  }
+}
+```
+
 ## ผู้จัดทำ
 |รหัสนักศึกษา|ชื่อ - นามสกุล|
 |--|--|
