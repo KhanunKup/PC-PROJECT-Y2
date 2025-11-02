@@ -20,7 +20,7 @@ Switch
 ![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/8ecb4a5e3200306e91684e915195413c6bd5387d/resources/Switch.png)
 
 ## Poster
-
+![image](https://media.discordapp.net/attachments/1426179466723459092/1434464197634424913/Add_a_heading_4.png?ex=69086c63&is=69071ae3&hm=7896be626f5095b1fe45f7dcf8c9d56ea161d94fc4782dbac7522ec58d1ebbc7&=&format=webp&quality=lossless&width=710&height=1006)
 ## Clip VDO แนะนำโปรเจกต์
 
 ## Library ที่ใช้งาน
