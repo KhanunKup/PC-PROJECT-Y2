@@ -9,7 +9,7 @@
 ## วงจรใน Arduino
 ![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/main/resources/tinkercad.png?raw=true)
 
-![image]()
+![image](https://github.com/KhanunKup/PC-PROJECT-Y2/blob/main/resources/drive.png?raw=true)
 
 ## อุปกรณ์ที่ใช้
 
